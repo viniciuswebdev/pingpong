@@ -5,6 +5,11 @@ var TECLA = {
   S: 83
 };
 
+var pontuacao = {
+  jogador1 : 0,  
+  jogador2 : 0   
+};
+
 var jogo = {};
 jogo.pressionou = [];
 
@@ -96,10 +101,14 @@ function moveAsteroide() {
     asteroide.direcaoY = -1;
   }
 
-  // Não deixa ultrapassar o limite lateral direito do fundo
+    // Não deixa ultrapassar o limite lateral direito do fundo
   if( (asteroide.x + asteroide.velocidade * asteroide.direcaoX) > FundoLargura ) {
     asteroide.direcaoX = -1;
+    // Incrementa a pontuação do jogador1
+    pontuacao.jogador1++;
+    $("#jogador1").html(pontuacao.jogador1);
   }
+
 
   // Não deixa ultrapassar o limite superior do fundo
   if ( (asteroide.y + asteroide.velocidade * asteroide.direcaoY) < 0 ) {
@@ -107,39 +116,61 @@ function moveAsteroide() {
   }
 
   // Não deixa ultrapassar o limite lateral esquerdo do fundo
-  if ( (asteroide.x + asteroide.velocidade * asteroide.direcaoX) < 0 ) {
+if ( (asteroide.x + asteroide.velocidade * asteroide.direcaoX) < 0 ) {
+  asteroide.direcaoX = 1;
+  // Incrementa a pontuação do jogador2
+  pontuacao.jogador2++;
+  $("#jogador2").html(pontuacao.jogador2);
+}
+
+// Condição de finalização do jogo
+if (pontuacao.jogador1==5 || pontuacao.jogador2==5)
+  gameOver();
+
+/*
+* Detectando as colisões
+*/
+function gameOver() {
+  // Para a música de fundo
+  document.getElementById("musica").pause();
+
+  // Exibe um alerta dizendo o ganhador
+  if (pontuacao.jogador1>pontuacao.jogador2) {
+    alert("Jogador 1 Ganhou!!");
+  } else {
+    alert("Jogador 2 Ganhou!!");
+  }
+}
+
+
+var paddle1X = parseInt(paddle1.css("left")) + parseInt(paddle1.css("width"));
+var paddle1YBaixo = parseInt(paddle1.css("top")) + parseInt(paddle1.css("height"));
+var paddle1YTopo = parseInt(paddle1.css("top"));
+
+if ( ( asteroide.x + asteroide.velocidade * asteroide.direcaoX ) < paddle1X )
+{
+  if ( ( (asteroide.y + asteroide.velocidade * asteroide.direcaoY) <= paddle1YBaixo ) && 
+     ( (asteroide.y + asteroide.velocidade * asteroide.direcaoY) >= paddle1YTopo)
+  ) {
     asteroide.direcaoX = 1;
-  }  
+    som.play();
+  }
+}  
 
-  /*
-  * Detectando as colisões   
-  */
+var paddle2X = parseInt(paddle2.css("left")) + parseInt(paddle2.css("width")) - 51;
+var paddle2YBaixo = parseInt(paddle2.css("top")) + parseInt(paddle2.css("height"));
+var paddle2YTopo = parseInt(paddle2.css("top"));
 
-  var paddle1X = parseInt(paddle1.css("left")) + parseInt(paddle1.css("width"));
-  var paddle1YBaixo = parseInt(paddle1.css("top")) + parseInt(paddle1.css("height"));
-  var paddle1YTopo = parseInt(paddle1.css("top"));
+if ( ( asteroide.x + asteroide.velocidade * asteroide.direcaoX ) >= paddle2X )
+{
+  if ( ( (asteroide.y + asteroide.velocidade * asteroide.direcaoY) <= paddle2YBaixo ) &&
+     ( (asteroide.y + asteroide.velocidade * asteroide.direcaoY) >= paddle2YTopo )
+  ) {
+    asteroide.direcaoX = -1;
+    som.play();
+  }
+}
 
-  if ( ( asteroide.x + asteroide.velocidade * asteroide.direcaoX ) < paddle1X )
-  {
-    if ( ( (asteroide.y + asteroide.velocidade * asteroide.direcaoY) <= paddle1YBaixo ) && 
-       ( (asteroide.y + asteroide.velocidade * asteroide.direcaoY) >= paddle1YTopo)
-    ) {
-      asteroide.direcaoX = 1;
-    }
-  }  
-
-	var paddle2X = parseInt(paddle2.css("left")) + parseInt(paddle2.css("width")) - 51;
-	var paddle2YBaixo = parseInt(paddle2.css("top")) + parseInt(paddle2.css("height"));
-	var paddle2YTopo = parseInt(paddle2.css("top"));
-
-	if ( ( asteroide.x + asteroide.velocidade * asteroide.direcaoX ) >= paddle2X )
-	{
-	  if ( ( (asteroide.y + asteroide.velocidade * asteroide.direcaoY) <= paddle2YBaixo ) &&
-	     ( (asteroide.y + asteroide.velocidade * asteroide.direcaoY) >= paddle2YTopo )
-	  ) {
-	    asteroide.direcaoX = -1;
-	  }
-	}
 
 
   // Atualiza as propriedades 'left' e 'top' da div '#asteroide'
