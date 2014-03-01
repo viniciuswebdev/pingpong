@@ -1,0 +1,29 @@
+#fundo{
+	background: url(fundo.png);
+	width: 600px;
+	height: 400px;
+	position: relative;
+	overflow: hidden;
+}
+
+#asteroide {
+	background: url(asteroide.png);
+	position: absolute;
+	width: 51px;
+	height: 45px;
+	left: 250px;
+	top: 165px;
+}
+
+.paddle {
+	background: #d30000;
+	left: 30px;
+	top: 70px;
+	position: absolute;
+	width: 10px;
+	height: 80px;
+}
+
+#paddle2 {
+	left: 570px;
+}
