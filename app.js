@@ -17,10 +17,8 @@ app.get("/", function(req, resp){
 
 io.sockets.on('connection', function (socket) {
 
-  socket.emit('news', { hello: 'world' });
-
   socket.on('key', function (data) {
-    console.log(data);
+      socket.broadcast.emit('position', data );
   });
 
 });

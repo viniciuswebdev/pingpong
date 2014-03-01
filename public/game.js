@@ -20,51 +20,64 @@ var paddle1;
 var paddle2;
 
 var socket = io.connect('http://localhost');
-socket.on('news', function (data) {
-  console.log(data);
-});
 
 function loop()
 {
-  moveBatedores();
   moveAsteroide();
 }
 
-function moveBatedores() {
-  if (jogo.pressionou[TECLA.W]) {
+function moveBatedores(key) {
+  if (key == TECLA.W) {
     socket.emit('key', TECLA.W);
-    paddle1.css("top",parseInt(paddle1.css("top"))-5);
-  } else if (jogo.pressionou[TECLA.S]) {
+    moveP1Up();
+  } else if (key == TECLA.S) {
     socket.emit('key', TECLA.S);
-    paddle1.css("top",parseInt(paddle1.css("top"))+5);    
+    moveP1Down(); 
   }
-  if (jogo.pressionou[TECLA.CIMA]) {
+  if (key == TECLA.CIMA) {
+    moveP2Up();
     socket.emit('key', TECLA.CIMA);
-    paddle2.css("top",parseInt(paddle2.css("top"))-5);  
-  } else if (jogo.pressionou[TECLA.BAIXO]) {
+  } else if (key == TECLA.BAIXO) {
     socket.emit('key', TECLA.BAIXO);
-    paddle2.css("top",parseInt(paddle2.css("top"))+5);
+    moveP2Down();
+  }
+}
+
+function moveBatedores2(key) {
+  if (key == TECLA.W) {
+    moveP1Up();
+  } else if (key == TECLA.S) {
+    moveP1Down(); 
+  }
+  if (key == TECLA.CIMA) {
+    moveP2Up();
+  } else if (key == TECLA.BAIXO) {
+    moveP2Down();
   }
 }
 
 function moveP1Up()
 {
+    paddle1.css("top",parseInt(paddle1.css("top"))-5);
 
 }
 
 function moveP1Down()
 {
-  
+      paddle1.css("top",parseInt(paddle1.css("top"))+5);    
+
 }
 
 function moveP2Up()
 {
+    paddle2.css("top",parseInt(paddle2.css("top"))-5);  
 
 }
 
 function moveP2Down()
 {
-  
+      paddle2.css("top",parseInt(paddle2.css("top"))+5);
+
 }
 
 
@@ -142,6 +155,8 @@ function moveAsteroide() {
 
 $(function(){
 
+window.setInterval(function(){
+
   // Armazena nas variáveis (globais) dos jogadores a referência dos elementos
   paddle1 = $("#paddle1");
   paddle2 = $("#paddle2");  
@@ -151,12 +166,22 @@ $(function(){
 
   // Ao pressionar uma tecla
   $(document).keydown(function(e){
-    jogo.pressionou[e.which] = true;
+    moveBatedores(e.which);
     });
+
+  socket.on('position', function (data) {
+    moveBatedores2(data);
+  });
+
+
 
   // Ao soltar uma tecla pressionada
     $(document).keyup(function(e){
       jogo.pressionou[e.which] = false;
   });
+
+},10000);
+
+
 
 });
