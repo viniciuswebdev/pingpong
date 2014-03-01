@@ -155,33 +155,34 @@ function moveAsteroide() {
 
 $(function(){
 
-window.setInterval(function(){
 
-  // Armazena nas variáveis (globais) dos jogadores a referência dos elementos
-  paddle1 = $("#paddle1");
-  paddle2 = $("#paddle2");  
+  socket.emit('first', true);
 
-  // Armazena na propriedade 'timer' a função setInterval()
-  jogo.timer = setInterval(loop, 30); // Executa a função loop() a cada 30 milesegundos
+   $("h1").click(function(){
+      socket.emit('ready', true);
+   });
 
-  // Ao pressionar uma tecla
-  $(document).keydown(function(e){
-    moveBatedores(e.which);
+  socket.on('start', function (data) {
+
+    // Armazena nas variáveis (globais) dos jogadores a referência dos elementos
+    paddle1 = $("#paddle1");
+    paddle2 = $("#paddle2");  
+
+    // Armazena na propriedade 'timer' a função setInterval()
+    jogo.timer = setInterval(loop, 30); // Executa a função loop() a cada 30 milesegundos
+
+    // Ao pressionar uma tecla
+    $(document).keydown(function(e){
+      moveBatedores(e.which);
+      });
+
+    socket.on('key', function (data) {
+      moveBatedores2(data);
     });
 
-  socket.on('position', function (data) {
-    moveBatedores2(data);
+      $(document).keyup(function(e){
+        jogo.pressionou[e.which] = false;
+    });
   });
-
-
-
-  // Ao soltar uma tecla pressionada
-    $(document).keyup(function(e){
-      jogo.pressionou[e.which] = false;
-  });
-
-},10000);
-
-
 
 });
