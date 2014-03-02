@@ -197,6 +197,7 @@ $(function(){
       });
 
     socket.on('key', function (data) {
+            console.log('s')
       moveBatedores2(data);
     });
 

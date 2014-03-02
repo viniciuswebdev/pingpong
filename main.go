@@ -16,26 +16,9 @@ var users = make([]User, 0)
 
 func first(ns *socketio.NameSpace, fc bool) {
   users = append(users, User{ns.Id(), false})
-  for i := 0; i < len(users); i++ {
-    fmt.Printf("p[%d] == %d\n", i, users[i].id)
-  }
 }
 
-func ready(ns *socketio.NameSpace, fc bool) {
-  for i := 0; i < len(users); i++ {
-    if(users[i].id == ns.Id()){
-      users[i].ready = true;
-    }
-  }
 
- for i := 0; i < len(users); i++ {
-    if(!users[i].ready){
-      fmt.Printf("not ready")
-      return
-    }
-  }
-  ns.Emit("start", true)
-}
 
 func onConnect(ns *socketio.NameSpace) {
   fmt.Println("connected:", ns.Id(), " in channel ", ns.Endpoint())
@@ -59,18 +42,27 @@ func main() {
   sio.On("connect", onConnect)
   sio.On("disconnect", onDisconnect)
   sio.On("first", first)
-  sio.On("ready", ready)
+  sio.On("ready", func (ns *socketio.NameSpace, fc bool) {
+  for i := 0; i < len(users); i++ {
+    if(users[i].id == ns.Id()){
+      users[i].ready = true;
+    }
+  }
+
+ for i := 0; i < len(users); i++ {
+    if(!users[i].ready){
+      fmt.Printf("not ready")
+      return
+    }
+  }
+  sio.Broadcast("start", true)
+})
   sio.On("key", func(ns *socketio.NameSpace, key int){
     sio.Broadcast("key", key)
   })
 
-  sio.Of("/pol").On("connect", onConnect)
-  sio.Of("/pol").On("disconnect", onDisconnect)
-  sio.Of("/pol").On("first", first)
-  sio.Of("/pol").On("ready", ready)
-  sio.Of("/pol").On("key", func(ns *socketio.NameSpace, key int){
-    sio.Broadcast("key", key)
-  })
+  
+
 
   sio.Handle("/", http.FileServer(http.Dir("./public/")))
 
