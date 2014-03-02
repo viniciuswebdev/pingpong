@@ -1,11 +1,11 @@
-#fundo{
-	width: 600px;
-	height: 400px;
+#background{
+	width: 700px;
+	height: 500px;
 	position: relative;
 	overflow: hidden;
 }
 
-#asteroide {
+#ball {
 	position: absolute;
 	width: 51px;
 	height: 45px;
@@ -18,14 +18,14 @@
 .paddle {
 	background: #d30000;
 	left: 30px;
-	top: 70px;
+	top: 100px;
 	position: absolute;
 	width: 10px;
-	height: 80px;
+	height: 100px;
 }
 
 #paddle2 {
-	left: 570px;
+	left: 670px;
 }
 
 .game {
