@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Pong</title>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="http://code.jquery.com/jquery.min.js"></script>
-  <script src="game.js"></script>
-  <link rel="stylesheet" href="style.css" type="text/css" media="screen">
-</head>
-
- <body>
-  <audio src="som.mp3" preload="true" id="som"></audio>
-  <audio src="musica.mp3" preload="true" id="musica" autoplay loop></audio>
-  <h1>Pong</h1>
-  <div id="fundo">
-    <div id="asteroide"></div>
-    <div id="paddle1" class="paddle"></div>
-    <div id="paddle2" class="paddle"></div>
-  </div>
-  <div id="pontuacao">
-    <div class="pontos">Jogador 1 : <span id="jogador1">0</span></div>
-    <div class="pontos">Jogador 2 : <span id="jogador2">0</span></div>
-  </div>      
+	<head>
+		<meta charset="UTF-8">
+		<title>Pong</title>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="http://code.jquery.com/jquery.min.js"></script>
+		<script src="game.js"></script>
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen">
+	</head>
+ 	<body>
+		<audio src="som.mp3" preload="true" id="som"></audio>
+  		<audio src="musica.mp3" preload="true" id="musica" autoplay loop></audio>
+		<div class="container">
+			<div class="game">
+				<button id="ready">ready</button>
+				<div id="fundo">
+					<div id="asteroide"></div>
+					<div id="paddle1" class="paddle"></div>
+					<div id="paddle2" class="paddle"></div>
+				</div>
+				<div id="pontuacao">
+					<div class="pontos">Jogador 1 : <span id="jogador1">0</span></div>
+					<div class="pontos">Jogador 2 : <span id="jogador2">0</span></div>
+				</div>
+			</div>   
+		</div>   
 	</body>
 </html>
-
-
-

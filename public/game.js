@@ -137,8 +137,10 @@ function gameOver() {
   // Exibe um alerta dizendo o ganhador
   if (pontuacao.jogador1>pontuacao.jogador2) {
     alert("Jogador 1 Ganhou!!");
+    window.location("/");
   } else {
     alert("Jogador 2 Ganhou!!");
+    window.location("/");
   }
 }
 
@@ -171,8 +173,6 @@ if ( ( asteroide.x + asteroide.velocidade * asteroide.direcaoX ) >= paddle2X )
   }
 }
 
-
-
   // Atualiza as propriedades 'left' e 'top' da div '#asteroide'
   $("#asteroide").css({
     "left" : asteroide.x,
@@ -186,10 +186,9 @@ if ( ( asteroide.x + asteroide.velocidade * asteroide.direcaoX ) >= paddle2X )
 
 $(function(){
 
-
   socket.emit('first', true);
 
-   $("h1").click(function(){
+   $("#ready").click(function(){
       socket.emit('ready', true);
    });
 

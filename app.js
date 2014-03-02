@@ -7,7 +7,6 @@ var ejs = require('ejs'),
 
 var users = [];
 
-
 app.configure(function () {
   app.set('view enginge','ejs');
   app.set('view options',{ layout:false });
@@ -25,6 +24,14 @@ io.sockets.on('connection', function (socket) {
     console.log(users);
   });
 
+  socket.on('disconnect', function() {
+      for(var i in users){
+        if(users[i].id == socket.id){
+          users.splice(i, 1);
+        }
+      }
+   });
+
   socket.on('ready', function (data) {
       for(var i in users){
         if(users[i].id == socket.id){
@@ -32,17 +39,17 @@ io.sockets.on('connection', function (socket) {
         }
       }
 
-      console.log(users);
-
       for(var i in users){
         if(!users[i].ready){
           return;
         }        
       }
+
       io.sockets.emit('start', data );
   });
 
   socket.on('key', function (data) {
       socket.broadcast.emit('key', data );
   });
+
 });

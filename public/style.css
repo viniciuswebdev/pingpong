@@ -1,5 +1,4 @@
 #fundo{
-	background: url(fundo.png);
 	width: 600px;
 	height: 400px;
 	position: relative;
@@ -7,12 +6,13 @@
 }
 
 #asteroide {
-	background: url(asteroide.png);
 	position: absolute;
 	width: 51px;
 	height: 45px;
 	left: 250px;
 	top: 165px;
+	border-radius: 50%;
+	background-color: black;
 }
 
 .paddle {
@@ -26,4 +26,9 @@
 
 #paddle2 {
 	left: 570px;
+}
+
+.game {
+	margin: 0 auto;
+	width: 600px;
 }
