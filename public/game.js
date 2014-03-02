@@ -34,17 +34,13 @@ function loop()
 function moveBatedores(key) {
   if (key == TECLA.W) {
     socket.emit('key', TECLA.W);
-    moveP1Up();
   } else if (key == TECLA.S) {
     socket.emit('key', TECLA.S);
-    moveP1Down(); 
   }
   if (key == TECLA.CIMA) {
     socket.emit('key', TECLA.CIMA);
-    moveP2Up();
   } else if (key == TECLA.BAIXO) {
     socket.emit('key', TECLA.BAIXO);
-    moveP2Down();
   }
 }
 

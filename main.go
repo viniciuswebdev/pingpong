@@ -56,7 +56,7 @@ func main() {
   sio.Broadcast("start", true)
 })
   sio.On("key", func(ns *socketio.NameSpace, key int){
-    sio.Except(ns).Broadcast("key", key)
+    sio.Broadcast("key", key)
   })
 
   sio.Handle("/", http.FileServer(http.Dir("./public/")))
