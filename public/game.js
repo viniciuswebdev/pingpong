@@ -24,7 +24,7 @@ jogo.asteroide = {
 var paddle1;
 var paddle2;
 
-var socket = io.connect('http://localhost');
+var socket = io.connect();
 
 function loop()
 {
