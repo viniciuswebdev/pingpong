@@ -18,8 +18,6 @@ func first(ns *socketio.NameSpace, fc bool) {
   users = append(users, User{ns.Id(), false})
 }
 
-
-
 func onConnect(ns *socketio.NameSpace) {
   fmt.Println("connected:", ns.Id(), " in channel ", ns.Endpoint())
 }
@@ -58,7 +56,7 @@ func main() {
   sio.Broadcast("start", true)
 })
   sio.On("key", func(ns *socketio.NameSpace, key int){
-    sio.Broadcast("key", key)
+    sio.Except(ns).Broadcast("key", key)
   })
 
   
