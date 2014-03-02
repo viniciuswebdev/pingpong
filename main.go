@@ -39,8 +39,6 @@ func ready(ns *socketio.NameSpace, fc bool) {
 
 func onConnect(ns *socketio.NameSpace) {
   fmt.Println("connected:", ns.Id(), " in channel ", ns.Endpoint())
-  ns.Session.Values["name"] = "this guy"
-  ns.Emit("news", "this is totally news", 3)
 }
 
 func onDisconnect(ns *socketio.NameSpace) {
@@ -51,7 +49,6 @@ func onDisconnect(ns *socketio.NameSpace) {
   }
 }
 
-
 func main() {
   sock_config := &socketio.Config{}
   sock_config.HeartbeatTimeout = 2
@@ -59,7 +56,6 @@ func main() {
 
   sio := socketio.NewSocketIOServer(sock_config)
 
-  // Handler for new connections, also adds socket.io event handlers
   sio.On("connect", onConnect)
   sio.On("disconnect", onDisconnect)
   sio.On("first", first)
@@ -68,8 +64,6 @@ func main() {
     sio.Broadcast("key", key)
   })
 
-
-  //in politics channel
   sio.Of("/pol").On("connect", onConnect)
   sio.Of("/pol").On("disconnect", onDisconnect)
   sio.Of("/pol").On("first", first)
@@ -78,8 +72,7 @@ func main() {
     sio.Broadcast("key", key)
   })
 
-  //this will serve a http static file server
   sio.Handle("/", http.FileServer(http.Dir("./public/")))
-  //startup the server
+
   log.Fatal(http.ListenAndServe(":3000", sio))
 }
