@@ -16,7 +16,6 @@
 }
 
 .paddle {
-	background: #d30000;
 	left: 30px;
 	top: 100px;
 	position: absolute;
