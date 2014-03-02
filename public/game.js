@@ -57,20 +57,20 @@ function movePaddles(key) {
 
 function moveBall() {
     var background = $("#background");
-    var FundoAltura = parseInt(background.height());
-    var FundoLargura = parseInt(background.width());
+    var backgroundHeight = parseInt(background.height());
+    var backgroundWidth = parseInt(background.width());
 
     var BALL = GAME.BALL;
     BALL.PX += BALL.V * BALL.DX;
     BALL.PY += BALL.V * BALL.DY;
 
     // limit bottom
-    if ((BALL.PY + BALL.V * BALL.DY) > FundoAltura) {
+    if ((BALL.PY + BALL.V * BALL.DY) > backgroundHeight) {
         BALL.DY = -1;
     }
 
     // limit right
-    if ((BALL.PX + BALL.V * BALL.DX) > FundoLargura) {
+    if ((BALL.PX + BALL.V * BALL.DX) > backgroundWidth) {
         BALL.DX = -1;
         SCORE.P1++;
         $("#P1").html(SCORE.P1);
