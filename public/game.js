@@ -131,17 +131,7 @@ if (pontuacao.jogador1==5 || pontuacao.jogador2==5)
 * Detectando as colisões
 */
 function gameOver() {
-  // Para a música de fundo
-  document.getElementById("musica").pause();
 
-  // Exibe um alerta dizendo o ganhador
-  if (pontuacao.jogador1>pontuacao.jogador2) {
-    alert("Jogador 1 Ganhou!!");
-    window.location("/");
-  } else {
-    alert("Jogador 2 Ganhou!!");
-    window.location("/");
-  }
 }
 
 
