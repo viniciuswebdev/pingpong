@@ -63,25 +63,25 @@ function moveBatedores2(key) {
 
 function moveP1Up()
 {
-    paddle1.css("top",parseInt(paddle1.css("top"))-5);
+    paddle1.css("top",parseInt(paddle1.css("top"))-50);
 
 }
 
 function moveP1Down()
 {
-      paddle1.css("top",parseInt(paddle1.css("top"))+5);    
+      paddle1.css("top",parseInt(paddle1.css("top"))+50);    
 
 }
 
 function moveP2Up()
 {
-    paddle2.css("top",parseInt(paddle2.css("top"))-5);  
+    paddle2.css("top",parseInt(paddle2.css("top"))-50);  
 
 }
 
 function moveP2Down()
 {
-      paddle2.css("top",parseInt(paddle2.css("top"))+5);
+      paddle2.css("top",parseInt(paddle2.css("top"))+50);
 
 }
 
