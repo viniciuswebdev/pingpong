@@ -59,9 +59,6 @@ func main() {
     sio.Except(ns).Broadcast("key", key)
   })
 
-  
-
-
   sio.Handle("/", http.FileServer(http.Dir("./public/")))
 
   log.Fatal(http.ListenAndServe(":3000", sio))
