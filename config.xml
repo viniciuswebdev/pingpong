@@ -1,0 +1,18 @@
+<widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://viniciuswebdev.com"
+        id       = "com.hardpingpong.mobile"
+        versionCode="10"
+        version   = "1.0.0">
+
+    <name>Ping Pong</name>
+
+    <description>
+        Classic ping pong game!
+    </description>
+
+    <author href="http://www.viniciuswebdev.com" email="viniciusoliveira417@gmail.com">
+    </author>
+
+    <preference name="fullscreen" value="true" />
+
+</widget>
