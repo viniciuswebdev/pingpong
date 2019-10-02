@@ -2,3 +2,4 @@
 
 Simple ping pong game made with Javascript.
 
+Enjoy.
